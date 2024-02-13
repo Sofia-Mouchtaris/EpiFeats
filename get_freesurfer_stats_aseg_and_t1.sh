@@ -24,9 +24,6 @@ freesurfer_out_dir=./aseg_and_stats_pier/
 subject_file="subjects.txt"
 subject_list=()
 
-counter=0
-max_iterations=2
-
 # Read the subject file line by line
 for freesurfer_dir_subject in "$freesurfer_dir"/sub*; do
 
@@ -84,13 +81,6 @@ for freesurfer_dir_subject in "$freesurfer_dir"/sub*; do
         # add completed patient to subject list
         subject_list+=("$subject")
 
-    fi
-
-    ((counter++))
-
-    if [ "$counter" -gt "$max_iterations" ]; then
-        echo "Breaking out of the loop."
-        break
     fi
 
 done
