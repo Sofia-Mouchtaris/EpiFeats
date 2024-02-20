@@ -1,4 +1,14 @@
-From inside the folder with the code
+To run full pipeline:
 ```
-bash get_freesurfer_stats_aseg_and_t1.sh /project/davis_group_1/group_projects/structural_cat/outputs/freesurfer/
+bash run_full_pipeline.sh \
+    -i /path/to/freesurfer/ # required
+    -o /path/to/desired/output/folder/ # optional; if not given, will write to current directory
+    -r /path/to/results/doc.csv # optional
+```
+
+To start from computing features (if pipeline failed on compilation of features):
+```
+bash direct_compute_features.sh \
+    -o /path/to/desired/output/folder/ # required; same as -o from original run
+    -r /path/to/results/doc.csv # optional
 ```
