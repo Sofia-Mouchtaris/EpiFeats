@@ -1,33 +1,11 @@
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import LeaveOneOut
-from sklearn.metrics import accuracy_score
 import os
-from sklearn.model_selection import KFold
 import nibabel as nib
 from nibabel import freesurfer as nfs
 import numpy as np
-from sklearn.metrics import confusion_matrix
-
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.feature_selection import SelectKBest, f_classif
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import KFold
-from sklearn.metrics import accuracy_score
-
-from sklearn.model_selection import GridSearchCV, KFold
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.feature_selection import SelectKBest, f_classif
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
 
 import matplotlib.pyplot as plt
 from tqdm import tqdm
-
-from sklearn.decomposition import PCA
-from sklearn.metrics import classification_report
 
 # myscript.py
 import sys
@@ -35,7 +13,8 @@ import sys
 # Get input list from command line
 if len(sys.argv) > 1:
     freesurfer_dir = sys.argv[1]
-    subjects = sys.argv[2:]
+    outcomes_doc = sys.argv[2]
+    subjects = sys.argv[3:]
     # print(f"Received input list: {subjects}")
     # print(f"Received input list: {freesurfer_dir}")
 else:
@@ -73,11 +52,17 @@ def compute_cortical_intensity_features(subject, freesurfer_dir):
     for label in unique_labels:
         mask = aparc_aseg_data == label
         mean_intensity = np.mean(t1w_data[mask])
+
+        if label not in true_labels:
+            continue
         
         cortical_intensity_features[f"{true_labels[label]}_mean_intensity"] = mean_intensity
 
     # Compute asymmetry
     for label in unique_labels:
+        if label not in true_labels:
+            continue
+
         if label > 1000 and label < 2000:
             left_key = f"{true_labels[label]}_mean_intensity"
             right_key = f"{true_labels[label+1000]}_mean_intensity"
@@ -284,3 +269,4 @@ df = pd.DataFrame(data_list, columns=all_feature_names)
 df['Subject'] = subjects_succeeded
 
 df.to_pickle('freesurfer_features.p')
+
