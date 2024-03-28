@@ -5,7 +5,7 @@ EpiFeats is a simple toolbox that automatically extracts features (included cort
 <h2>Running the pipeline</h2>
 <h3>Installing the conda environment</h3>
 
-Please make sure you have Anaconda installed. First clone the directory then import the conda environment. After cloning, open the repository folder in a terminal window and type:
+Please make sure you have Anaconda installed. From the terminal window:
 
 ```
 git clone https://github.com/penn-cnt/EpiFeats.git
