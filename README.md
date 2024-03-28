@@ -1,4 +1,26 @@
-To run full pipeline:
+<h1>EpiFeats</h1>
+
+EpiFeats is a simple toolbox that automatically extracts features (included cortical thickness, cortical and subcortical volumetry, T1w intensity, and left-right asymmetries of these) from FreeSurfer outputs, allowing researchers to have a baseline set of standardized features that they can test their own biomarkers and models against.
+
+<h2>Running the pipeline</h2>
+<h3>Installing the conda environment</h3>
+
+Please make sure you have Anaconda installed. First clone the directory then import the conda environment. After cloning, open the repository folder in a terminal window and type:
+
+```
+git clone https://github.com/penn-cnt/EpiFeats.git
+cd EpiFeats
+conda env create -f environment.yml
+```
+
+This will create a new Python virtual environment with all the required libraries. To activate the environment:
+
+```
+conda activate epifeats
+```
+
+<h3>To run the full EpiFeats pipeline:</h3>
+
 ```
 bash run_full_pipeline.sh \
     -i /path/to/freesurfer/ \ # required
